@@ -1,1 +1,1 @@
-# -ReversiKata
+# ReversiKata
