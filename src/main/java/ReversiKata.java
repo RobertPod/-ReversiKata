@@ -18,7 +18,7 @@ public class ReversiKata {
      * If the proposed move is correct, returns true
      */
     public boolean checkForCorrectMove(int[][] newBoard) {
-        return true;
+        return false;
     }
 
     public int[][] getBoard() {
