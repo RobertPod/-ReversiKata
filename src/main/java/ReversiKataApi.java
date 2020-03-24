@@ -10,6 +10,7 @@ public class ReversiKataApi {
         board[4][3] = -1;
 
         ReversiKata rk = new ReversiKata(board);
+        board[4][2] = 1;
         printBoard(board);
     }
 
@@ -29,7 +30,7 @@ public class ReversiKataApi {
             case 0:
                 return ".";
             case -1:
-                return "R";
+                return "W";
             default:
                 throw new IllegalArgumentException();
         }

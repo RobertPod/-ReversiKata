@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class ReversiKataTest {
 
     @Test
-    void shouldBeAddedToExistingOnes() {
+    void shouldNotBeAddedInSeparation() {
         // given
         int[][] board = startBoard(8);
         ReversiKata rk = new ReversiKata(board);
@@ -14,6 +14,17 @@ class ReversiKataTest {
         board[0][0] = 2;
         // then
         assertThat(rk.checkForCorrectMove(board)).isFalse();
+    }
+
+    @Test
+    void shouldBeAddedToExistingOnes() {
+        // given
+        int[][] board = startBoard(8);
+        ReversiKata rk = new ReversiKata(board);
+        // when
+        board[4][2] = 2;
+        // then
+        assertThat(rk.checkForCorrectMove(board)).isTrue();
     }
 
     private int[][] startBoard(int boardSize) {
