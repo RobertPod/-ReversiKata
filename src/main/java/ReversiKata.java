@@ -18,18 +18,23 @@ public class ReversiKata {
      * If the proposed move is correct, returns true
      */
     public boolean checkForCorrectMove(int[][] newBoard) {
-        int[] newPawn = findNewPawn(newBoard);
+        NewPawn newPawn = findNewPawn(newBoard);
         return checkForPresenceOfPawnInNeighborhood(newBoard, newPawn) != 0;
     }
 
-    private int checkForPresenceOfPawnInNeighborhood(int[][] newBoard, int[] newPawn) {
+    public int[][] getBoard() {
+        return board;
+    }
+
+    private int checkForPresenceOfPawnInNeighborhood(int[][] newBoard, NewPawn newPawn) {
         var numberPawsInNeighborhood = 0;
         var boardSize = board[0].length;
+
         for (var i = -1; i <= 1; i++) {
             for (var j = -1; j <= 1; j++) {
-                if (isFieldOnBoard(newPawn[0], newPawn[1], i, j, boardSize)) {
-                    if (newAndOldPawnsHaveDifferentColours(newBoard[newPawn[0] + i][newPawn[1] + j],
-                        newPawn[2])) {
+                if (isFieldOnBoard(newPawn.getX(), newPawn.getY(), i, j, boardSize)) {
+                    if (newAndOldPawnsHaveDifferentColours(newBoard[newPawn.getX() + i][newPawn.getY() + j],
+                        newPawn.getValue())) {
                         numberPawsInNeighborhood++;
                     }
                 }
@@ -44,36 +49,53 @@ public class ReversiKata {
 
     private boolean isFieldOnBoard(int centralFieldX, int centralFieldY, int offsetX, int offsetY,
         int boardSize) {
-//        return
-        boolean ret = ((centralFieldX + offsetX >= 0
+        return ((centralFieldX + offsetX >= 0
             && centralFieldY + offsetY >= 0
             && centralFieldX + offsetX < boardSize
             && centralFieldY + offsetY < boardSize)
             && (offsetX != 0 || offsetY != 0)
         );
-        return ret;
     }
 
-    private int[] findNewPawn(int[][] board) {
-        int[] retXYColor = new int[3];
+    private NewPawn findNewPawn(int[][] board) {
+        NewPawn newPawn = null;
         var boardSize = board[0].length;
+
         for (var i = 0; i < boardSize; i++) {
             for (var j = 0; j < boardSize; j++) {
                 if (Math.abs(board[i][j]) > 1) {
-                    retXYColor[0] = i;
-                    retXYColor[1] = j;
-                    retXYColor[2] = board[i][j];
+                    newPawn = new NewPawn(i, j, board[i][j]);
                     break;
                 }
             }
-            if (retXYColor[2] != 0) {
+            if (null != newPawn) {
                 break;
             }
         }
-        return retXYColor;
+        return newPawn;
     }
 
-    public int[][] getBoard() {
-        return board;
+    private class NewPawn {
+        private int x;
+        private int y;
+        private int value;
+
+        public NewPawn(int x, int y, int value) {
+            this.x = x;
+            this.y = y;
+            this.value = value;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

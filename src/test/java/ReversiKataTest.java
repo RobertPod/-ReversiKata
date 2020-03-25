@@ -1,5 +1,4 @@
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -61,8 +60,6 @@ class ReversiKataTest {
         // then
         assertThat(rk.checkForCorrectMove(board)).isFalse();
     }
-
-
 
     private int[][] startBoard(int boardSize) {
         int[][] board = new int[boardSize][boardSize];
