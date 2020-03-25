@@ -28,7 +28,8 @@ public class ReversiKata {
         for (var i = -1; i <= 1; i++) {
             for (var j = -1; j <= 1; j++) {
                 if (isFieldOnBoard(newPawn[0], newPawn[1], i, j, boardSize)) {
-                    if (newBoard[newPawn[0] + i][newPawn[1] + j] != 0) {
+                    if (newAndOldPawnsHaveDifferentColours(newBoard[newPawn[0] + i][newPawn[1] + j],
+                        newPawn[2])) {
                         numberPawsInNeighborhood++;
                     }
                 }
@@ -37,14 +38,20 @@ public class ReversiKata {
         return numberPawsInNeighborhood;
     }
 
+    private boolean newAndOldPawnsHaveDifferentColours(int existingPawn, int newPawn) {
+        return (Math.abs(existingPawn + newPawn) == 1);
+    }
+
     private boolean isFieldOnBoard(int centralFieldX, int centralFieldY, int offsetX, int offsetY,
         int boardSize) {
-        return (centralFieldX + offsetX >= 0
+//        return
+        boolean ret = ((centralFieldX + offsetX >= 0
             && centralFieldY + offsetY >= 0
             && centralFieldX + offsetX < boardSize
-            && centralFieldY + offsetY < boardSize
-            && (offsetX != 0 && offsetY != 0)
+            && centralFieldY + offsetY < boardSize)
+            && (offsetX != 0 || offsetY != 0)
         );
+        return ret;
     }
 
     private int[] findNewPawn(int[][] board) {
