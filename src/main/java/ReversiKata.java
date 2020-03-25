@@ -27,12 +27,7 @@ public class ReversiKata {
         var boardSize = board[0].length;
         for (var i = -1; i <= 1; i++) {
             for (var j = -1; j <= 1; j++) {
-                if (newPawn[0] + i >= 0
-                    && newPawn[1] + j >= 0
-                    && newPawn[0] + i < boardSize
-                    && newPawn[1] + j < boardSize
-                    && (i != 0 && j != 0)
-                ) {
+                if (isFieldOnBoard(newPawn[0], newPawn[1], i, j, boardSize)) {
                     if (newBoard[newPawn[0] + i][newPawn[1] + j] != 0) {
                         numberPawsInNeighborhood++;
                     }
@@ -40,6 +35,16 @@ public class ReversiKata {
             }
         }
         return numberPawsInNeighborhood;
+    }
+
+    private boolean isFieldOnBoard(int centralFieldX, int centralFieldY, int offsetX, int offsetY,
+        int boardSize) {
+        return (centralFieldX + offsetX >= 0
+            && centralFieldY + offsetY >= 0
+            && centralFieldX + offsetX < boardSize
+            && centralFieldY + offsetY < boardSize
+            && (offsetX != 0 && offsetY != 0)
+        );
     }
 
     private int[] findNewPawn(int[][] board) {
