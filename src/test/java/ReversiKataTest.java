@@ -5,6 +5,14 @@ import org.junit.jupiter.api.Test;
 
 class ReversiKataTest {
 
+//   B . . . . . . .
+//   . . . . . . . .
+//   . . . . . . . .
+//   . . . B W . . .
+//   . . . W B . . .
+//   . . . . . . . .
+//   . . . . . . . .
+//   . . . . . . . .
     @Test
     void shouldNotBeAddedInSeparation() {
         // given
@@ -16,6 +24,14 @@ class ReversiKataTest {
         assertThat(rk.checkForCorrectMove(board)).isFalse();
     }
 
+//   . . . . . . . .
+//   . . . . . . . .
+//   . . . . . . . .
+//   . . . B W . . .
+//   . . B W B . . .
+//   . . . . . . . .
+//   . . . . . . . .
+//   . . . . . . . .
     @Test
     void shouldBeAddedToExistingOnes() {
         // given

@@ -16,6 +16,7 @@ public class ReversiKataApi {
 
     private static void printBoard(int[][] board) {
         for (var i = 0; i < boardSize; i++) {
+            System.out.print("//  ");
             for(var j = 0; j < boardSize; j++){
              System.out.print(" " + fieldValue(board[i][j]));
             }
